@@ -105,6 +105,6 @@ const createAd = (index) => {
   };
 };
 
-const adList = new Array(OFFER_COUNT).fill(null).map((item, index) => createAd(index));
+const generateAdList = () => new Array(OFFER_COUNT).fill(null).map((item, index) => createAd(index));
 
-adList;
+generateAdList();
