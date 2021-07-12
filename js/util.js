@@ -21,4 +21,14 @@ const shuffleArr = (arr) => arr.sort(() => Math.random() - 0.5);
 
 const getArrayRandLength = (arr) => shuffleArr(arr.slice(0, getRandomNumber(1, arr.length)));
 
-export {getRandomNumber, getRandomReal, getArrayRandElement, getArrayRandLength, shuffleArr};
+const toggleDisabledElement = (element, isDisabled) => {
+  element.disabled = isDisabled;
+};
+
+const toggleDisabledElementList = (elementList, isDisabled) => {
+  elementList.forEach((element) => {
+    toggleDisabledElement(element, isDisabled);
+  });
+};
+
+export {getRandomNumber, getRandomReal, getArrayRandElement, getArrayRandLength, shuffleArr, toggleDisabledElement, toggleDisabledElementList};
