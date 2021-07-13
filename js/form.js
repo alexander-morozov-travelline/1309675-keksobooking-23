@@ -30,7 +30,6 @@ const MIN_TITLE_LENGTH = 30;
 
 const onTitleChange = () => {
   const valueLength = offerTitle.value.length;
-
   if (valueLength < MIN_TITLE_LENGTH) {
     offerTitle.reportValidity();
   }
