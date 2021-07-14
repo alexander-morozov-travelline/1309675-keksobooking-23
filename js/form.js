@@ -10,15 +10,16 @@ const price = form.querySelector('#price');
 const typeOfHouseSelect = form.querySelector('#type');
 const timeInSelect = form.querySelector('#timein');
 const timeOutSelect = form.querySelector('#timeout');
+const address = form.querySelector('#address');
 
-const GUEST_ROOM_AVAILABLE_LIST = {
+const guestRoomAvailableList = {
   1: {0: false, 1: true, 2: false, 3: false},
   2: {0: false, 1: true, 2: true, 3: false},
   3: {0: false, 1: true, 2: true, 3: true},
   100: {0: true, 1: false, 2: false, 3: false},
 };
 
-const MIN_PRICE_FOR_NIGHT = {
+const minPriceForNight = {
   'bungalow': 0,
   'flat': 1000,
   'hotel': 3000,
@@ -27,6 +28,11 @@ const MIN_PRICE_FOR_NIGHT = {
 };
 
 const MIN_TITLE_LENGTH = 30;
+
+const setAddressInput = (coords) => {
+  address.value = coords;
+};
+
 
 const onTitleChange = () => {
   const valueLength = offerTitle.value.length;
@@ -58,14 +64,14 @@ const onTimeChange = (timeValue) => {
 
 const onTypeOfHouseChange = () => {
   const typeOfHouse = typeOfHouseSelect.value;
-  const minPrice = MIN_PRICE_FOR_NIGHT[typeOfHouse];
+  const minPrice = minPriceForNight[typeOfHouse];
   price.setAttribute('min', minPrice);
   price.placeholder = minPrice;
 };
 
 const onRoomChange = () => {
   const roomAmount = roomsSelect.value;
-  const guestRoomAvailable = GUEST_ROOM_AVAILABLE_LIST[roomAmount];
+  const guestRoomAvailable = guestRoomAvailableList[roomAmount];
 
   optionCapacityGuests.forEach((option) => {
     const isOptionDisabled = !guestRoomAvailable[option.value];
@@ -91,4 +97,4 @@ guestsSelect.addEventListener('change', onGuestsChange);
 onRoomChange();
 onTypeOfHouseChange();
 
-export {disableOfferForm, enableOfferForm};
+export {disableOfferForm, enableOfferForm, setAddressInput};

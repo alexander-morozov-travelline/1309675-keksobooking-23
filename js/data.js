@@ -1,6 +1,6 @@
 import {getArrayRandLength, getArrayRandElement, getRandomReal, getRandomNumber} from './util.js';
 
-const TITLE_LIST = [
+const TitleList = [
   'Эконом двухместный',
   'Стандарт одноместный',
   'Стандарт двухместный',
@@ -10,7 +10,7 @@ const TITLE_LIST = [
 ];
 const PRICE_MIN = 1000;
 const PRICE_MAX = 50000;
-const TYPE_LIST = [
+const TypeList = [
   'palace',
   'flat',
   'house',
@@ -21,17 +21,17 @@ const ROOMS_MIN = 1;
 const ROOMS_MAX = 10;
 const GUESTS_MIN = 1;
 const GUESTS_MAX = 10;
-const CHECKIN_LIST = [
+const CheckinList = [
   '12:00',
   '13:00',
   '14:00',
 ];
-const CHECKOUT_LIST = [
+const CheckoutList = [
   '12:00',
   '13:00',
   '14:00',
 ];
-const FEATURE_LIST = [
+const FeatureList = [
   'wifi',
   'dishwasher',
   'parking',
@@ -39,13 +39,13 @@ const FEATURE_LIST = [
   'elevator',
   'conditioner',
 ];
-const DESCRIPTION_LIST = [
+const DescriptionList = [
   'Номер оснащенный по самому последнему слову техники',
   'Удобное расположение в самом центре города',
   'Идеальное место для отдыха',
   'Просторное жильё в роскошных аппартаментах',
 ];
-const PHOTO_LIST = [
+const PhotoList = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
@@ -57,24 +57,24 @@ const LNG_MAX = 139.80000;
 const LOCATION_DECIMAL_NUMBER = 5;
 
 
-const createAd = (index) => {
+const createOffer = (index) => {
   const number = String(index + 1).padStart(2, '0');
   return {
     'author': {
       'avatar': `img/avatars/user${number}.png`,
     },
     'offer': {
-      'title': getArrayRandElement(TITLE_LIST),
+      'title': getArrayRandElement(TitleList),
       'address': `${getRandomReal(LAT_MIN, LAT_MAX, LOCATION_DECIMAL_NUMBER)}, ${getRandomReal(LNG_MIN, LNG_MAX, LOCATION_DECIMAL_NUMBER)}`,
       'price': getRandomNumber(PRICE_MIN, PRICE_MAX),
-      'type':  getArrayRandElement(TYPE_LIST),
+      'type':  getArrayRandElement(TypeList),
       'rooms': getRandomNumber(ROOMS_MIN, ROOMS_MAX),
       'guests': getRandomNumber(GUESTS_MIN, GUESTS_MAX),
-      'checkin': getArrayRandElement(CHECKIN_LIST),
-      'checkout': getArrayRandElement(CHECKOUT_LIST),
-      'features': getArrayRandLength(FEATURE_LIST),
-      'description': getArrayRandElement(DESCRIPTION_LIST),
-      'photos': getArrayRandLength(PHOTO_LIST),
+      'checkin': getArrayRandElement(CheckinList),
+      'checkout': getArrayRandElement(CheckoutList),
+      'features': getArrayRandLength(FeatureList),
+      'description': getArrayRandElement(DescriptionList),
+      'photos': getArrayRandLength(PhotoList),
     },
     'location': {
       'lat': Number(getRandomReal(LAT_MIN, LAT_MAX, LOCATION_DECIMAL_NUMBER)),
@@ -83,6 +83,6 @@ const createAd = (index) => {
   };
 };
 
-const generateAdList = (offerCount) => new Array(offerCount).fill(null).map((item, index) => createAd(index));
+const generateOfferList = (offerCount) => new Array(offerCount).fill(null).map((item, index) => createOffer(index));
 
-export {generateAdList};
+export {generateOfferList};
