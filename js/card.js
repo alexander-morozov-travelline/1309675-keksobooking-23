@@ -1,5 +1,4 @@
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
-const map = document.querySelector('.map__canvas');
 const offerType = {
   'palace': 'Дворец',
   'flat': 'Квартира',
@@ -17,7 +16,7 @@ const fillElementOfferData = (element, text) => {
 
 };
 
-const fillTemplateCard = ({author, offer}) => {
+const getTemplateCard = ({author, offer}) => {
   const card = cardTemplate.cloneNode(true);
   const cardTitle = card.querySelector('.popup__title');
   const cardAddress = card.querySelector('.popup__text--address');
@@ -78,9 +77,4 @@ const fillTemplateCard = ({author, offer}) => {
   return card;
 };
 
-const createCard = (offer) => {
-  const offerCard = fillTemplateCard(offer);
-  return map.appendChild(offerCard);
-};
-
-export {createCard};
+export {getTemplateCard};
