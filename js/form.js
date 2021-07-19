@@ -100,19 +100,16 @@ const onResetClick = (evt) => {
   resetApp();
 };
 
-const setFormSubmit = (send) => {
-  form.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    send(evt.target)
-      .then(() => {
-        showSuccessPopup();
-      })
-      .then(() => {
-        resetApp();
-      })
-      .catch(() => showErrorPopup());
-  });
-};
+
+form.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  const formData = new FormData(form);
+  sendData(formData)
+    .then(showSuccessPopup)
+    .then(resetApp)
+    .catch(showErrorPopup);
+});
+
 
 offerTitle.addEventListener('change', onTitleChange);
 price.addEventListener('change', onPriceChange);
@@ -125,6 +122,5 @@ resetButton.addEventListener('click', onResetClick);
 
 onRoomChange();
 onTypeOfHouseChange();
-setFormSubmit(sendData);
 
 export {disableOfferForm, enableOfferForm, setAddressInput, resetForm};

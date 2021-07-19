@@ -9,11 +9,11 @@ const OFFER_COUNT = 10;
 deactivateApp();
 
 initMap
-  .then(() => {
-    activateApp();
-  }).then(() => getData(),
-  ).then((offerList) => {
+  .then(activateApp)
+  .then(getData)
+  .then((offerList) => {
     offerList.slice(0, OFFER_COUNT).forEach((offer) => createOfferMarker(offer));
-  }).catch( (error) => {
+  })
+  .catch( (error) => {
     showAlert(`Не удалось загрузить объявления (${error})`);
   });

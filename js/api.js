@@ -12,11 +12,11 @@ const getData = () => (
     .then((response) => response.json())
 );
 
-const sendData = (form) => (
+const sendData = (formData) => (
   fetch(API_SEND_DATA_URL,
     {
       method: 'POST',
-      body: new FormData(form),
+      body: formData,
     },
   ).then((response) => {
     if (response.ok) {
