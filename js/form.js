@@ -123,4 +123,4 @@ resetButton.addEventListener('click', onResetClick);
 onRoomChange();
 onTypeOfHouseChange();
 
-export {disableOfferForm, enableOfferForm, setAddressInput, resetForm};
+export {disableOfferForm, enableOfferForm, setAddressInput, resetForm, resetButton};

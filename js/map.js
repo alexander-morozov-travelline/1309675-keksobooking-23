@@ -117,8 +117,16 @@ const createOfferMarker = (offer) => {
     );
 };
 
+const drawOfferMarkers = (offerList) => {
+  offerList.forEach((offer) => createOfferMarker(offer));
+};
+
+const redrawOfferMarkers = (offerList) => {
+  addMarkersGroup.clearLayers();
+  drawOfferMarkers(offerList);
+};
 
 initMainPinCoords();
 
 
-export {initMap, createOfferMarker, resetMap, initMainPinCoords};
+export {initMap, drawOfferMarkers, redrawOfferMarkers, createOfferMarker, resetMap, initMainPinCoords};
