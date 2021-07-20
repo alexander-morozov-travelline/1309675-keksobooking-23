@@ -1,4 +1,7 @@
 import {toggleDisabledElement, toggleDisabledElementList} from './util.js';
+import {showSuccessPopup, showErrorPopup} from './popup.js';
+import {resetApp} from './state.js';
+import {sendData} from './api.js';
 
 const form = document.querySelector('.ad-form');
 const formFieldsets = form.querySelectorAll('fieldset');
@@ -11,6 +14,7 @@ const typeOfHouseSelect = form.querySelector('#type');
 const timeInSelect = form.querySelector('#timein');
 const timeOutSelect = form.querySelector('#timeout');
 const address = form.querySelector('#address');
+const resetButton = form.querySelector('.ad-form__reset');
 
 const guestRoomAvailableList = {
   1: {0: false, 1: true, 2: false, 3: false},
@@ -57,6 +61,10 @@ const enableOfferForm = () => {
   toggleDisabledElementList(formFieldsets, false);
 };
 
+const resetForm = () => {
+  form.reset();
+};
+
 const onTimeChange = (timeValue) => {
   timeInSelect.value = timeValue.target.value;
   timeOutSelect.value = timeValue.target.value;
@@ -86,6 +94,23 @@ const onGuestsChange = () => {
   guestsSelect.setCustomValidity('');
 };
 
+
+const onResetClick = (evt) => {
+  evt.preventDefault();
+  resetApp();
+};
+
+
+form.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  const formData = new FormData(form);
+  sendData(formData)
+    .then(showSuccessPopup)
+    .then(resetApp)
+    .catch(showErrorPopup);
+});
+
+
 offerTitle.addEventListener('change', onTitleChange);
 price.addEventListener('change', onPriceChange);
 timeInSelect.addEventListener('change', onTimeChange);
@@ -93,8 +118,9 @@ timeOutSelect.addEventListener('change', onTimeChange);
 typeOfHouseSelect.addEventListener('change', onTypeOfHouseChange);
 roomsSelect.addEventListener('change', onRoomChange);
 guestsSelect.addEventListener('change', onGuestsChange);
+resetButton.addEventListener('click', onResetClick);
 
 onRoomChange();
 onTypeOfHouseChange();
 
-export {disableOfferForm, enableOfferForm, setAddressInput};
+export {disableOfferForm, enableOfferForm, setAddressInput, resetForm};
