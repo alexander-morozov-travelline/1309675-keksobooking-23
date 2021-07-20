@@ -24,9 +24,7 @@ let map;
 
 const initMap = new Promise((resolve) => {
   map = L.map('map-canvas')
-    .on('load', () => {
-      resolve();
-    })
+    .on('load', resolve)
     .setView({
       lat: defaultCoords.LAT,
       lng: defaultCoords.LNG,
@@ -128,5 +126,11 @@ const redrawOfferMarkers = (offerList) => {
 
 initMainPinCoords();
 
-
-export {initMap, drawOfferMarkers, redrawOfferMarkers, createOfferMarker, resetMap, initMainPinCoords};
+export {
+  initMap,
+  drawOfferMarkers,
+  redrawOfferMarkers,
+  createOfferMarker,
+  resetMap,
+  initMainPinCoords
+};

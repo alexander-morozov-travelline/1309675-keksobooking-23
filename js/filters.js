@@ -78,4 +78,10 @@ const filterOffers = (offerList) =>
     matchesFilterByHousingFeatures(ad));
 
 
-export {filters, disableFilters, enableFilters, resetFilter, filterOffers};
+export {
+  filters,
+  disableFilters,
+  enableFilters,
+  resetFilter,
+  filterOffers
+};

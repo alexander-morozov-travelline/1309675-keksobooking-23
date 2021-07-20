@@ -1,7 +1,13 @@
 import {isEscEvent, isEnterEvent} from './util.js';
 
-const successPopupTemplate = document.querySelector('#success').content.querySelector('.success');
-const errorPopupTemplate = document.querySelector('#error').content.querySelector('.error');
+const successPopupTemplate = document
+  .querySelector('#success')
+  .content
+  .querySelector('.success');
+const errorPopupTemplate = document
+  .querySelector('#error')
+  .content
+  .querySelector('.error');
 
 let successPopup = null;
 let errorPopup = null;
