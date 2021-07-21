@@ -1,7 +1,6 @@
 import {disableOfferForm, enableOfferForm, resetForm } from './form.js';
-import {disableFilters, enableFilters} from './filters.js';
+import {disableFilters, enableFilters, resetFilter} from './filters.js';
 import {resetMap} from './map.js';
-import {resetFilter} from './filter.js';
 
 const activateApp = () => {
   enableOfferForm();

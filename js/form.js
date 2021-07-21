@@ -3,6 +3,8 @@ import {showSuccessPopup, showErrorPopup} from './popup.js';
 import {resetApp} from './state.js';
 import {sendData} from './api.js';
 
+const MIN_TITLE_LENGTH = 30;
+
 const form = document.querySelector('.ad-form');
 const formFieldsets = form.querySelectorAll('fieldset');
 const offerTitle = form.querySelector('#title');
@@ -31,12 +33,9 @@ const minPriceForNight = {
   'palace': 10000,
 };
 
-const MIN_TITLE_LENGTH = 30;
-
 const setAddressInput = (coords) => {
   address.value = coords;
 };
-
 
 const onTitleChange = () => {
   const valueLength = offerTitle.value.length;
@@ -46,7 +45,7 @@ const onTitleChange = () => {
 };
 
 const onPriceChange = () => {
-  if(price.value < price.min || price>price.max) {
+  if (price.value < price.min || price>price.max) {
     price.reportValidity();
   }
 };
@@ -84,7 +83,7 @@ const onRoomChange = () => {
   optionCapacityGuests.forEach((option) => {
     const isOptionDisabled = !guestRoomAvailable[option.value];
     toggleDisabledElement(option, isOptionDisabled);
-    if(option.selected && isOptionDisabled){
+    if (option.selected && isOptionDisabled) {
       guestsSelect.setCustomValidity('Выберите допустимое значение из списка');
     }
   });
@@ -123,4 +122,10 @@ resetButton.addEventListener('click', onResetClick);
 onRoomChange();
 onTypeOfHouseChange();
 
-export {disableOfferForm, enableOfferForm, setAddressInput, resetForm};
+export {
+  disableOfferForm,
+  enableOfferForm,
+  setAddressInput,
+  resetForm,
+  resetButton
+};
