@@ -68,20 +68,6 @@ const enableOfferForm = () => {
   toggleDisabledElementList(formFieldsets, false);
 };
 
-const resetForm = () => {
-  form.reset();
-  price.placeholder = minPriceForNight[TYPE_PRICE_DEFAULT];
-  avatarPreview.src = AVATAR_DEFAULT;
-  housePreviewContainer.innerHTML = '';
-  onTypeOfHouseChange();
-  onRoomChange();
-};
-
-const onTimeChange = (timeValue) => {
-  timeInSelect.value = timeValue.target.value;
-  timeOutSelect.value = timeValue.target.value;
-};
-
 const onTypeOfHouseChange = () => {
   const typeOfHouse = typeOfHouseSelect.value;
   const minPrice = minPriceForNight[typeOfHouse];
@@ -100,6 +86,20 @@ const onRoomChange = () => {
       guestsSelect.setCustomValidity('Выберите допустимое значение из списка');
     }
   });
+};
+
+const resetForm = () => {
+  form.reset();
+  price.placeholder = minPriceForNight[TYPE_PRICE_DEFAULT];
+  avatarPreview.src = AVATAR_DEFAULT;
+  housePreviewContainer.innerHTML = '';
+  onTypeOfHouseChange();
+  onRoomChange();
+};
+
+const onTimeChange = (timeValue) => {
+  timeInSelect.value = timeValue.target.value;
+  timeOutSelect.value = timeValue.target.value;
 };
 
 const onGuestsChange = () => {
@@ -129,10 +129,12 @@ const setPreview = (input, preview) => {
 };
 
 avatarInput.addEventListener('change', (evt) => {
+  evt.preventDefault();
   setPreview(avatarInput, avatarPreview);
 });
 
 houseInput.addEventListener('change', (evt) => {
+  evt.preventDefault();
   const housePhotoPreview = document.createElement('img');
   housePhotoPreview.style.width = '100%';
   housePhotoPreview.style.height = '100%';

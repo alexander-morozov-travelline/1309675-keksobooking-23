@@ -11,6 +11,8 @@ const errorPopupTemplate = document
 
 let successPopup = null;
 let errorPopup = null;
+let onSuccessPopupKeydown = null;
+let onErrorPopupKeydown = null;
 
 const onCloseSuccessPopup = () => {
   if (successPopup !== null) {
@@ -30,14 +32,14 @@ const onCloseErrorPopup = () => {
   }
 };
 
-const onSuccessPopupKeydown = (evt) => {
+onSuccessPopupKeydown = (evt) => {
   if (isEscEvent(evt) || isEnterEvent(evt)) {
     evt.preventDefault();
     onCloseSuccessPopup();
   }
 };
 
-const onErrorPopupKeydown = (evt) => {
+onErrorPopupKeydown = (evt) => {
   if (isEscEvent(evt) || isEnterEvent(evt)) {
     evt.preventDefault();
     onCloseErrorPopup();
