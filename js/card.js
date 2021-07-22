@@ -13,7 +13,6 @@ const fillElementOfferData = (element, text) => {
   } else {
     element.classList.add('visually-hidden');
   }
-
 };
 
 const getTemplateCard = ({author, offer}) => {
@@ -36,7 +35,7 @@ const getTemplateCard = ({author, offer}) => {
   fillElementOfferData(cardType, offerType[offer.type]);
   fillElementOfferData(cardDescription, offer.description);
 
-  if(author.avatar) {
+  if (author.avatar) {
     cardAvatar.src = author.avatar;
   } else {
     cardAvatar.classList.add('visually-hidden');
@@ -51,7 +50,7 @@ const getTemplateCard = ({author, offer}) => {
   }
 
   cardFeatures.innerHTML = '';
-  if(offer.features) {
+  if (offer.features) {
     offer.features.forEach((feature) => {
       const featureElement = document.createElement('li');
       featureElement.classList.add(
@@ -65,7 +64,7 @@ const getTemplateCard = ({author, offer}) => {
   }
 
   cardPhotoList.innerHTML = '';
-  if(offer.photos) {
+  if (offer.photos) {
     offer.photos.forEach((photo) => {
       const photoElement = cardPhoto.cloneNode(false);
       photoElement.src = photo;

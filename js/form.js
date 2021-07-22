@@ -3,6 +3,10 @@ import {showSuccessPopup, showErrorPopup} from './popup.js';
 import {resetApp} from './state.js';
 import {sendData} from './api.js';
 
+const MIN_TITLE_LENGTH = 30;
+const AVATAR_DEFAULT = 'img/muffin-grey.svg';
+const TYPE_PRICE_DEFAULT = 'flat';
+
 const form = document.querySelector('.ad-form');
 const formFieldsets = form.querySelectorAll('fieldset');
 const offerTitle = form.querySelector('#title');
@@ -15,6 +19,12 @@ const timeInSelect = form.querySelector('#timein');
 const timeOutSelect = form.querySelector('#timeout');
 const address = form.querySelector('#address');
 const resetButton = form.querySelector('.ad-form__reset');
+const avatarInput = form.querySelector('#avatar');
+const avatarPreview = form.querySelector('.ad-form-header__preview img');
+const houseInput = form.querySelector('#images');
+const housePreviewContainer = form.querySelector('.ad-form__photo');
+
+const imageExtensions = ['gif', 'jpg', 'jpeg', 'png'];
 
 const guestRoomAvailableList = {
   1: {0: false, 1: true, 2: false, 3: false},
@@ -31,12 +41,9 @@ const minPriceForNight = {
   'palace': 10000,
 };
 
-const MIN_TITLE_LENGTH = 30;
-
 const setAddressInput = (coords) => {
   address.value = coords;
 };
-
 
 const onTitleChange = () => {
   const valueLength = offerTitle.value.length;
@@ -46,7 +53,7 @@ const onTitleChange = () => {
 };
 
 const onPriceChange = () => {
-  if(price.value < price.min || price>price.max) {
+  if (price.value < price.min || price>price.max) {
     price.reportValidity();
   }
 };
@@ -63,6 +70,11 @@ const enableOfferForm = () => {
 
 const resetForm = () => {
   form.reset();
+  price.placeholder = minPriceForNight[TYPE_PRICE_DEFAULT];
+  avatarPreview.src = AVATAR_DEFAULT;
+  housePreviewContainer.innerHTML = '';
+  onTypeOfHouseChange();
+  onRoomChange();
 };
 
 const onTimeChange = (timeValue) => {
@@ -84,7 +96,7 @@ const onRoomChange = () => {
   optionCapacityGuests.forEach((option) => {
     const isOptionDisabled = !guestRoomAvailable[option.value];
     toggleDisabledElement(option, isOptionDisabled);
-    if(option.selected && isOptionDisabled){
+    if (option.selected && isOptionDisabled) {
       guestsSelect.setCustomValidity('Выберите допустимое значение из списка');
     }
   });
@@ -100,6 +112,34 @@ const onResetClick = (evt) => {
   resetApp();
 };
 
+const setPreview = (input, preview) => {
+  const file = input.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = imageExtensions.some((extension) => fileName.endsWith(extension));
+
+  if (matches) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => {
+      preview.src = reader.result;
+    });
+    reader.readAsDataURL(file);
+  }
+};
+
+avatarInput.addEventListener('change', (evt) => {
+  setPreview(avatarInput, avatarPreview);
+});
+
+houseInput.addEventListener('change', (evt) => {
+  const housePhotoPreview = document.createElement('img');
+  housePhotoPreview.style.width = '100%';
+  housePhotoPreview.style.height = '100%';
+  housePhotoPreview.style.objectFit = 'cover';
+  housePreviewContainer.appendChild(housePhotoPreview);
+  setPreview(houseInput, housePhotoPreview);
+});
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
@@ -109,7 +149,6 @@ form.addEventListener('submit', (evt) => {
     .then(resetApp)
     .catch(showErrorPopup);
 });
-
 
 offerTitle.addEventListener('change', onTitleChange);
 price.addEventListener('change', onPriceChange);
@@ -123,4 +162,10 @@ resetButton.addEventListener('click', onResetClick);
 onRoomChange();
 onTypeOfHouseChange();
 
-export {disableOfferForm, enableOfferForm, setAddressInput, resetForm};
+export {
+  disableOfferForm,
+  enableOfferForm,
+  setAddressInput,
+  resetForm,
+  resetButton
+};
